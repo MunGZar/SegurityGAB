@@ -1,21 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')
-export class Users {
+export class User{
   @PrimaryGeneratedColumn()
-  idUser: number;
+  id: number;
 
-  @Column({length: 50, unique: true })
-  Username: string;
+  @Column()
+  name: string;
 
-  @Column({length: 100, unique: true })
+  @Column({ unique: true })
   email: string;
 
-  @Column({length: 250})
+  @Column()
   password: string;
 
-  @Column({
-    type:'enum' ,
-    enum: ['Admin', 'Cliente', 'Proveedor']})
-  rol: 'Admin' | 'Cliente' | 'Proveedor';
+  @Column({ default: 'user' })
+  role: string; // 'user' | 'admin'
 }
