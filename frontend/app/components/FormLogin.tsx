@@ -1,67 +1,89 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function FormLogin() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      alert("Debes ingresar email y contraseña");
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      const res = await fetch('http://localhost:3001/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const errorData = await res.json();
-        alert(errorData.message);
+        alert(data.message || "Correo o contraseña incorrectos");
+        setLoading(false);
         return;
       }
 
-      const data = await res.json();
-      localStorage.setItem('token', data.access_token);
-      router.push('/dashboard');
+      // 🔹 Guardar usuario y token en AuthContext
+      const userData = { email: data.user.email, role: data.user.role };
+      login(userData, data.access_token);
+
+      // 🔹 Redirigir según rol
+      if (userData.role === "admin") {
+        router.push("/admin/dashboard");
+      } else {
+        router.push("/dashboard");
+      }
     } catch (err) {
       console.error(err);
-      alert('Error de conexión al backend');
+      alert("Error de conexión con el servidor");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-50 to-white">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">Iniciar Sesión</h2>
-        
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          className="w-full mb-4 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+    <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+      <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
+        Iniciar Sesión
+      </h2>
 
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          className="w-full mb-6 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full mb-4 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
 
-        <button
-          onClick={handleLogin}
-          className="w-full bg-blue-700 text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-semibold"
-        >
-          Iniciar Sesión
-        </button>
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full mb-6 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
 
-        <p className="text-center text-sm text-gray-500 mt-4">
-          ¿No tienes cuenta? <span className="text-blue-600 cursor-pointer">Regístrate</span>
-        </p>
-      </div>
+      <button
+        onClick={handleLogin}
+        disabled={loading}
+        className={`w-full py-3 rounded-lg text-white font-semibold transition-colors ${
+          loading
+            ? "bg-blue-400 cursor-not-allowed"
+            : "bg-blue-700 hover:bg-blue-800"
+        }`}
+      >
+        {loading ? "Cargando..." : "Iniciar Sesión"}
+      </button>
     </div>
   );
 }
