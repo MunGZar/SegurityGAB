@@ -10,9 +10,10 @@ import { Product } from './modules/products/products_entity/product_entity';
 // Modules
 import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
-  imports: [
+  imports: [AuthModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
