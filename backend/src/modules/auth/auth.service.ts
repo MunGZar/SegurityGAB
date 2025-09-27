@@ -1,15 +1,28 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import { User } from '../users/user_entity/user.entity';
+import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-        private readonly usersService: UsersService,// genera y verifica tokents
-        @InjectRepository(User)
-        private readonly userRepository: Repository<User>,
-    ) {}
-}
+  async login(email: string, password: string) {
+    const user = await this.usersService.findByEmail(email);
+    if (!user) throw new UnauthorizedException('Usuario o contraseña inválidos');
+
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) throw new UnauthorizedException('Usuario o contraseña inválidos|');
+
+    const payload = { sub: user.id, email: user.email, role: user.role };
+    const token = this.jwtService.sign(payload);
+
+    return {
+      message: 'Login successful',
+      access_token: token,
+      user: { id: user.id, email: user.email, role: user.role },
+    };
+  }
