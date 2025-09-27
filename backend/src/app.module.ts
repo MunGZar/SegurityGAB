@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { typeOrmConfig } from '../config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from './modules/users/user_entity/user.entity';
-import { UsersModule } from './modules/users/users.module';
+
+// Entities
+import { User} from './modules/users/user_entity/user.entity';
 import { Product } from './modules/products/products_entity/product_entity';
+
+// Modules
+import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
 
 @Module({
@@ -17,11 +20,12 @@ import { ProductsModule } from './modules/products/products.module';
       username: 'root',
       password: 'Admin01@',
       database: 'SegurityGAB',
-      entities: [Users, Product],
-      synchronize: false,
+      entities: [User, Product],
+      synchronize: true, // ⚠️ cambia a false en producción
       logging: true,
     }),
-    ProductsModule,   
+    UsersModule,    
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
