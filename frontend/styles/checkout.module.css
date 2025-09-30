@@ -1,0 +1,35 @@
+.checkout {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: #ddc2c2;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(6, 6, 6, 0.1);
+}
+
+.checkout h1 {
+  color: #2ecc71;
+  margin-bottom: 1rem;
+}
+
+.checkout p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.homeBtn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  background: #3498db;
+  color: #e4d9d9;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.homeBtn:hover {
+  background: #2980b9;
+}

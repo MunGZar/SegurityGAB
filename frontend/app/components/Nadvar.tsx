@@ -1,12 +1,17 @@
-"use client";
+"use client"
 
-import { LogOut, Shield, User } from "lucide-react";
-import Link from "next/link";
-import styles from "@/styles/navbar.module.css";
-import { useAuth } from "../context/AuthContext";
+import { LogOut, User, ShoppingCart } from "lucide-react"
+import Link from "next/link"
+import styles from "@/styles/navbar.module.css"
+import { useAuth } from "../context/AuthContext"
+import { useCart } from "../context/CartContext"
+import { useState } from "react"
+import Cart from "./Cart" 
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, logout } = useAuth()
+  const { cart } = useCart()
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   return (
     <header className={styles.header}>
@@ -23,7 +28,16 @@ export default function Navbar() {
         <nav className={styles.nav}>
           <Link href="/">Inicio</Link>
           <Link href="/productos">Productos</Link>
-          <Link href="/carrito">Mi carrito</Link>
+
+          {/* Carrito con contador y panel deslizante */}
+          <button
+            className={styles.cart}
+            onClick={() => setIsCartOpen(true)} 
+          >
+            <ShoppingCart size={20} />
+            <span className={styles.badge}>{cart.reduce((acc, item) => acc + item.cantidad, 0)}</span>
+            Mi carrito
+          </button>
 
           <div className="flex items-center space-x-4">
             {!user ? (
@@ -49,8 +63,9 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
-    </header>
-  );
-}
 
-      
+  
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+    </header>
+  )
+}
