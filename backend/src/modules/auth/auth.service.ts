@@ -12,10 +12,12 @@ export class AuthService {
 
   async login(email: string, password: string) {
     const user = await this.usersService.findByEmail(email);
-    if (!user) throw new UnauthorizedException('Usuario o contraseña inválidos');
+    if (!user)
+      throw new UnauthorizedException('Usuario o contraseña inválidos');
 
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) throw new UnauthorizedException('Usuario o contraseña inválidos|');
+    if (!valid)
+      throw new UnauthorizedException('Usuario o contraseña inválidos|');
 
     const payload = { sub: user.id, email: user.email, role: user.role };
     const token = this.jwtService.sign(payload);
@@ -25,5 +27,5 @@ export class AuthService {
       access_token: token,
       user: { id: user.id, email: user.email, role: user.role },
     };
-}
+  }
 }

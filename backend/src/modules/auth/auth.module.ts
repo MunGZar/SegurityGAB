@@ -8,7 +8,6 @@ import { User } from '../users/user_entity/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { UsersModule } from '../users/users.module';
 
-
 @Module({
   imports: [
     UsersModule,

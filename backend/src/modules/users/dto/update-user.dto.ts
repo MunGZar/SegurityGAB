@@ -1,4 +1,3 @@
-
 import { IsEmail, IsOptional, IsString, IsIn } from 'class-validator';
 
 export class UpdateUserDto {
@@ -12,7 +11,7 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsString()
-  password?: string; // Recuerda hashear en el servicio antes de guardar
+  password?: string;
 
   @IsOptional()
   @IsIn(['user', 'admin'])

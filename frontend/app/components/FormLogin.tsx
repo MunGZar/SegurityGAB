@@ -52,7 +52,9 @@ export default function FormLogin() {
   };
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md flex flex-col items-center">
+      <img src="/logo2.png" alt="Logo" height={60} width={60} className="mb-2" />
+
       <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
         Iniciar Sesión
       </h2>
