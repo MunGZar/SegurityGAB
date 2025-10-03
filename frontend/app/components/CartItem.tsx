@@ -21,13 +21,21 @@ export default function CartItem({ modelo, descripcion, precio, imagen, cantidad
         <h4>{modelo}</h4>
         <p>{descripcion}</p>
         <p>${precio.toLocaleString("es-CO")}</p>
-        <div className={styles.quantity}>
-          <button onClick={() => updateQuantity(modelo, cantidad - 1)}>-</button>
+
+       
+        <div className={styles.quantityControls}>
+          <button 
+            onClick={() => updateQuantity(modelo, cantidad - 1)} 
+            disabled={cantidad <= 1}
+          >
+            –
+          </button>
           <span>{cantidad}</span>
           <button onClick={() => updateQuantity(modelo, cantidad + 1)}>+</button>
         </div>
       </div>
 
+      
       <button
         className={styles.removeBtn}
         onClick={() => removeFromCart(modelo)}

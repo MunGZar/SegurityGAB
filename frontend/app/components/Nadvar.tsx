@@ -29,15 +29,15 @@ export default function Navbar() {
           <Link href="/">Inicio</Link>
           <Link href="/productos">Productos</Link>
 
-          {/* Carrito con contador y panel deslizante */}
+         
           <button
-            className={styles.cart}
-            onClick={() => setIsCartOpen(true)} 
-          >
-            <ShoppingCart size={20} />
-            <span className={styles.badge}>{cart.reduce((acc, item) => acc + item.cantidad, 0)}</span>
-            Mi carrito
-          </button>
+          className={`${styles.navLink} ${styles.cart}`}
+          onClick={() => setIsCartOpen(true)} 
+        > 
+         <ShoppingCart size={20} />
+         <span className={styles.badge}>{cart.length}</span>
+          Mi Carrito
+        </button>
 
           <div className="flex items-center space-x-4">
             {!user ? (
