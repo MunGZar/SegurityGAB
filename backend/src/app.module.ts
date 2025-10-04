@@ -1,20 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { typeOrmConfig } from '../config/typeorm.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-// Entities
-import { User} from './modules/users/user_entity/user.entity';
-import { Product } from './modules/products/products_entity/product_entity';
-
-// Modules
+import { Users } from './modules/users/user_entity/user.entity';
 import { UsersModule } from './modules/users/users.module';
+import { Product } from './modules/products/products_entity/product_entity';
 import { ProductsModule } from './modules/products/products.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { AdminModule } from './modules/users/admin/admin.module';
 
 @Module({
-  imports: [AuthModule,
+  imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -22,12 +17,11 @@ import { AdminModule } from './modules/users/admin/admin.module';
       username: 'root',
       password: 'Admin01@',
       database: 'SegurityGAB',
-      entities: [User, Product],
-      synchronize: true, // ⚠️ cambia a false en producción
+      entities: [Users, Product],
+      synchronize: false,
       logging: true,
     }),
-    UsersModule,    
-    ProductsModule,AdminModule
+    ProductsModule,   
   ],
   controllers: [AppController],
   providers: [AppService],
