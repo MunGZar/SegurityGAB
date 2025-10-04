@@ -18,6 +18,7 @@ export const productos: Producto[] = [
     precio: "499.000",
     imagen: '/images/cam1.jpg',
   },
+  
   {
     id: 2,
     modelo: 'HAG-PD2MP-FC-0280',
