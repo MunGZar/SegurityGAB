@@ -11,6 +11,7 @@ import { Product } from './modules/products/products_entity/product_entity';
 import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { AdminModule } from './modules/users/admin/admin.module';
 
 @Module({
   imports: [AuthModule,
@@ -26,7 +27,7 @@ import { AuthModule } from './modules/auth/auth.module';
       logging: true,
     }),
     UsersModule,    
-    ProductsModule,
+    ProductsModule,AdminModule
   ],
   controllers: [AppController],
   providers: [AppService],
