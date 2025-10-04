@@ -11,27 +11,24 @@ export default function DashboardPage() {
   useEffect(() => {
     // Si no hay usuario o token → redirige a login
     if (!user || !token) {
-      router.push("/login");
+      router.push("/page");
       return;
     }
 
     // Si es admin → redirige a dashboard de admin
     if (user.role === "admin") {
-      router.push("/dashboard/admin");
+      router.push("/admin");
       return;
     }
 
-    // Usuario normal se queda en esta página
+    // Usuario normal → redirige a la página principal de productos
+    if (user.role === "user") {
+      router.push("/productos");
+      return;
+    }
   }, [user, token, router]);
 
-  if (!user || user.role === "admin") {
+  if (!user || user.role === "admin" || user.role === "user") {
     return <p className="text-center mt-10">Redirigiendo...</p>;
   }
-
-  return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold">Dashboard Usuario</h1>
-      <p>Bienvenido al panel, solo usuarios autenticados pueden ver esto.</p>
-    </div>
-  );
 }

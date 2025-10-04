@@ -24,7 +24,7 @@ export const productos: Producto[] = [
     modelo: 'HAG-PD2MP-FC-0280',
     descripcion: 'Cámara domo HDCVI de 2 MP con lente fijo y tecnología Full Color.',
     precio: "499.000",
-    imagen: 'images/cam2.jpg',
+    imagen: '/images/cam2.jpg',
   },
   {
     id: 3,

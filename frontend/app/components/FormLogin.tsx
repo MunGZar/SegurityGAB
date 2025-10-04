@@ -39,7 +39,7 @@ export default function FormLogin() {
 
       // 🔹 Redirigir según rol
       if (userData.role === "admin") {
-        router.push("/admin/dashboard");
+        router.push("/dashboard/admin");
       } else {
         router.push("/dashboard");
       }

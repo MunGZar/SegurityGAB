@@ -29,11 +29,14 @@ export default function Nadvar() {
           <Link href="/">Inicio</Link>
           <Link href="/productos">Productos</Link>
           <Link href="/carrito">Mi carrito</Link>
+          
 
           {!user ? (
             <Link href="/login">Iniciar sesión</Link>
           ) : (
-            <button onClick={handleLogout}>Cerrar sesión</button>
+            <button onClick={handleLogout}>Cerrar Sesión</button>
+            
+
           )}
         </nav>
       </div>
