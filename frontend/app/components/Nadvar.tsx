@@ -1,12 +1,15 @@
 "use client";
 
-import { LogOut, Shield, User } from "lucide-react";
+import { LogOut, User } from "lucide-react";
+import { useState } from "react";
 import Link from "next/link";
 import styles from "@/styles/navbar.module.css";
 import { useAuth } from "../context/AuthContext";
+import Cart from "./Cart";
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
+const { user, logout } = useAuth();
+const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
     <header className={styles.header}>
@@ -35,9 +38,9 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <span className="text-sm">
-                  {user.name} ({user.role})
-                </span>
+<span className="text-sm">
+  {user.email} ({user.role})
+</span>
                 <button
                   onClick={logout}
                   className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm flex items-center gap-2"
@@ -51,7 +54,7 @@ export default function Navbar() {
       </div>
 
   
-      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+<Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   )
 }

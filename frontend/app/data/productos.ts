@@ -25,7 +25,7 @@ export const productos: Producto[] = [
     descripcion: 'Cámara domo HDCVI de 2 MP con lente fijo y tecnología Full Color.',
 
     precio: "499000",
-    imagen: 'images/cam2.jpg',
+    imagen: '/images/cam2.jpg',
 
   },
   {
