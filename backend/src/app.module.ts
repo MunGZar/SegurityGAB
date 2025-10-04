@@ -20,8 +20,8 @@ import { AuthModule } from './modules/auth/auth.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: 'admin',
-      database: 'seguritygab',
+      password: 'Admin01@',
+      database: 'SegurityGAB',
       entities: [User, Product],
       synchronize: true, // ⚠️ cambia a false en producción
       logging: true,
