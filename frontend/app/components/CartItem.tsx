@@ -20,7 +20,9 @@ export default function CartItem({ modelo, descripcion, precio, imagen, cantidad
       <div className={styles.cartInfo}>
         <h4>{modelo}</h4>
         <p>{descripcion}</p>
-        <p>${precio.toLocaleString("es-CO")}</p>
+       <p className={styles.cartPrice}>
+      ${precio.toLocaleString("es-CO")}
+      </p>
 
        
         <div className={styles.quantityControls}>

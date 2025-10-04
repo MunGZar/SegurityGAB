@@ -2,10 +2,10 @@
   max-width: 600px;
   margin: 4rem auto;
   padding: 2rem;
-  background: #d01515;
+  background: #574242;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(6, 6, 6, 0.1);
+  box-shadow: 0 4px 12px rgba(16, 15, 15, 0.1);
 }
 
 .checkout h1 {
@@ -23,7 +23,7 @@
   margin-top: 2rem;
   padding: 0.8rem 1.5rem;
   background: #3498db;
-  color: #e4d9d9;
+  color: #f3f0f0;
   text-decoration: none;
   border-radius: 8px;
   font-weight: bold;
@@ -33,3 +33,4 @@
 .homeBtn:hover {
   background: #2980b9;
 }
+

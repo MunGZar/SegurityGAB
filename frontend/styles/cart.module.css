@@ -6,7 +6,7 @@
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #dbcfcf;
+  background: #ccbdbd;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(37, 6, 6, 0.1);
 }
@@ -19,7 +19,7 @@
 
 .empty {
   text-align: center;
-  color: #100505;
+  color: #120b0b;
   font-size: 1.1rem;
   padding: 2rem;
 }
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #5875f6;
+  background: #7e85a2;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
@@ -47,7 +47,7 @@
 
 .cartItem:hover {
   transform: scale(1.01);
-  background: #933d3d;
+  background: #618db1;
 }
 
 .cartImage {
@@ -65,7 +65,7 @@
 .cartInfo h3 {
   margin: 0;
   font-size: 1.1rem;
-  color: #504442;
+  color: #4c403e;
 }
 
 .cartInfo p {
@@ -140,8 +140,8 @@
   right: 0;
   width: 350px;
   height: 100vh;
-  background: rgb(76, 81, 127);
-  box-shadow: -2px 0 10px rgba(5, 5, 5, 0.15);
+  background: rgb(68, 72, 105);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.15);
   padding: 1.5rem;
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
@@ -164,7 +164,7 @@
 }
 
 .closeBtn:hover {
-  color: #000000;
+  color: #c50d0d;
 }
 
 .cartPanel h2 {
@@ -179,7 +179,7 @@
 }
 
 .cartPanelFooter {
-  border-top: 2px solid #e3e3e3;
+  border-top: 2px solid #ece8e8;
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -194,9 +194,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ddd;
+  border: 1px solid #000000;
   border-radius: 10px;
-  background: #f5f5f5;
+  background: #f6f6f6;
   padding: 0.4rem 0.8rem;
   gap: 1rem;
   width: fit-content;
@@ -226,5 +226,19 @@
   min-width: 25px;
   text-align: center;
   font-size: 1rem;
-  color: #222;
+  color: #0c0a0a;
+}
+/* Mensaje de carrito vacío */
+.empty {
+  color: #fff; /* Texto en blanco */
+  text-align: center;
+  margin-top: 50px;
+  font-size: 16px;
+}
+/* Estilo para el precio en el carrito */
+.cartInfo .cartPrice {
+  color: #0b1d0f !important; 
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
 }

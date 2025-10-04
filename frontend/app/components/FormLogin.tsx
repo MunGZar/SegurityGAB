@@ -1,79 +1,91 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
-interface Props {
-  onLogin: (user: string, pass: string) => void;
-  onRegister: (user: string, email: string, pass: string) => void;
-}
-
-export default function FormLogin({ onLogin, onRegister }: Props) {
-  const [isRegister, setIsRegister] = useState(false);
-  const [user, setUser] = useState("");
+export default function FormLogin() {
+  const router = useRouter();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isRegister) {
-      onRegister(user, email, pass);
-      setIsRegister(false);
-    } else {
-      onLogin(user, pass);
+  const handleLogin = async () => {
+    if (!email || !password) {
+      alert("Debes ingresar email y contraseña");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || "Correo o contraseña incorrectos");
+        setLoading(false);
+        return;
+      }
+
+      // 🔹 Guardar usuario y token en AuthContext
+      const userData = { email: data.user.email, role: data.user.role };
+      login(userData, data.access_token);
+
+      // 🔹 Redirigir según rol
+      if (userData.role === "admin") {
+        router.push("/dashboard/admin");
+      } else {
+        router.push("/dashboard");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error de conexión con el servidor");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-xl shadow-md w-80"
-    >
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        {isRegister ? "Crear Cuenta" : "Iniciar Sesión"}
+    <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md flex flex-col items-center">
+      <img src="/logo2.png" alt="Logo" height={60} width={60} className="mb-2" />
+
+      <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
+        Iniciar Sesión
       </h2>
 
       <input
-        type="text"
-        placeholder="Usuario"
-        value={user}
-        onChange={(e) => setUser(e.target.value)}
-        className="w-full p-2 mb-3 border rounded"
-        required
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full mb-4 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      {isRegister && (
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-2 mb-3 border rounded"
-          required
-        />
-      )}
+
       <input
         type="password"
         placeholder="Contraseña"
-        value={pass}
-        onChange={(e) => setPass(e.target.value)}
-        className="w-full p-2 mb-3 border rounded"
-        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full mb-6 px-4 py-3 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
       <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+        onClick={handleLogin}
+        disabled={loading}
+        className={`w-full py-3 rounded-lg text-white font-semibold transition-colors ${
+          loading
+            ? "bg-blue-400 cursor-not-allowed"
+            : "bg-blue-700 hover:bg-blue-800"
+        }`}
       >
-        {isRegister ? "Registrar" : "Ingresar"}
+        {loading ? "Cargando..." : "Iniciar Sesión"}
       </button>
-
-      <p className="text-sm text-center mt-4">
-        {isRegister ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?"}{" "}
-        <span
-          onClick={() => setIsRegister(!isRegister)}
-          className="text-blue-600 cursor-pointer hover:underline"
-        >
-          {isRegister ? "Inicia sesión" : "Regístrate"}
-        </span>
-      </p>
-    </form>
+    </div>
   );
 }

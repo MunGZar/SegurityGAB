@@ -50,7 +50,7 @@ export default function Navbar() {
             ) : (
               <>
                 <span className="text-sm">
-                  {user.name} ({user.role})
+                  {user.email} ({user.role})
                 </span>
                 <button
                   onClick={logout}

@@ -1,18 +1,17 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { UsersService } from './users.service';
+import { Injectable } from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
 
-describe('UsersService', () => {
-  let service: UsersService;
+@Injectable()
+export class UsersService {
+  private users: any[] = [];
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService],
-    }).compile();
+  async create(createUserDto: CreateUserDto) {
+    const newUser = { id: Date.now(), ...createUserDto };
+    this.users.push(newUser);
+    return newUser;
+  }
 
-    service = module.get<UsersService>(UsersService);
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-});
+  async findAll() {
+    return this.users;
+  }
+}
