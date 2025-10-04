@@ -3,13 +3,20 @@
 import { LogOut, User } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "@/styles/navbar.module.css";
 import { useAuth } from "../context/AuthContext";
 import Cart from "./Cart";
 
 export default function Navbar() {
-const { user, logout } = useAuth();
-const [isCartOpen, setIsCartOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();          // Cierra la sesión
+    router.push("/");  // Redirige al inicio
+  };
 
   return (
     <header className={styles.header}>
@@ -38,14 +45,14 @@ const [isCartOpen, setIsCartOpen] = useState(false);
               </Link>
             ) : (
               <>
-<span className="text-sm">
-  {user.email} ({user.role})
-</span>
+                <span className="text-sm">
+                  {user.email} ({user.role})
+                </span>
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm flex items-center gap-2"
                 >
-                  <LogOut size={16} /> Salir
+                  <LogOut size={16} /> Cerrar Sesión
                 </button>
               </>
             )}
@@ -53,8 +60,7 @@ const [isCartOpen, setIsCartOpen] = useState(false);
         </nav>
       </div>
 
-  
-<Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
-  )
+  );
 }
