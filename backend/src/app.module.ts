@@ -21,7 +21,7 @@ import { ProductsModule } from './modules/products/products.module';
       synchronize: false,
       logging: true,
     }),
-    ProductsModule,   
+    ProductsModule,AdminModule,   
   ],
   controllers: [AppController],
   providers: [AppService],
