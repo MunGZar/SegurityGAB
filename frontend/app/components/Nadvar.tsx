@@ -45,9 +45,9 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <span className="text-sm">
+                <Link href="/dashboard/admin" className="text-sm">
                   {user.email} ({user.role})
-                </span>
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm flex items-center gap-2"
