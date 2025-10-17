@@ -2,9 +2,13 @@
 import { useState } from "react";
 import styles from "@/styles/admin.module.css";
 
-export default function ProductForm({ fetchProducts, editingItem }: any) {
+export default function ProductForm({
+  fetchProducts,
+  editingItem,
+  onUpdateComplete,
+}: any) {
   const [form, setForm] = useState(
-    editingItem || { name: "", description: "", price: "", image: "" }
+    editingItem || { name: "", description: "", price: "", stock: "", image: "" }
   );
   const [loading, setLoading] = useState(false);
 
@@ -18,8 +22,8 @@ export default function ProductForm({ fetchProducts, editingItem }: any) {
     try {
       const method = editingItem ? "PUT" : "POST";
       const url = editingItem
-        ? `http://localhost:3001/admin/products/${editingItem.id}`
-        : "http://localhost:3001/admin/products";
+        ? `http://localhost:3001/products/${editingItem.id}`
+        : "http://localhost:3001/products";
 
       await fetch(url, {
         method,
@@ -28,7 +32,10 @@ export default function ProductForm({ fetchProducts, editingItem }: any) {
       });
 
       fetchProducts();
-      setForm({ name: "", description: "", price: "", image: "" });
+      setForm({ name: "", description: "", price: "", stock: "", image: "" });
+      if (onUpdateComplete) {
+        onUpdateComplete();
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -41,10 +48,13 @@ export default function ProductForm({ fetchProducts, editingItem }: any) {
     if (!confirm("¿Seguro que quieres eliminar este producto?")) return;
     setLoading(true);
     try {
-      await fetch(`http://localhost:3001/admin/products/${editingItem.id}`, {
+      await fetch(`http://localhost:3001/products/${editingItem.id}`, {
         method: "DELETE",
       });
       fetchProducts();
+      if (onUpdateComplete) {
+        onUpdateComplete();
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -80,6 +90,15 @@ export default function ProductForm({ fetchProducts, editingItem }: any) {
         name="price"
         placeholder="Precio"
         value={form.price}
+        onChange={handleChange}
+        required
+        className={styles.input}
+      />
+      <input
+        type="number"
+        name="stock"
+        placeholder="Stock"
+        value={form.stock}
         onChange={handleChange}
         required
         className={styles.input}
