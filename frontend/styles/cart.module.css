@@ -6,7 +6,7 @@
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #dbcfcf;
+  background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(37, 6, 6, 0.1);
 }
@@ -14,7 +14,7 @@
 .cartPage h1 {
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
-  color: #8a6464;
+  color:rgb(241, 231, 231);
 }
 
 .empty {
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #5875f6;
+  background: azure;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 10px;
@@ -47,7 +47,7 @@
 
 .cartItem:hover {
   transform: scale(1.01);
-  background: #933d3d;
+  background:#E5E5E5;
 }
 
 .cartImage {
@@ -65,7 +65,7 @@
 .cartInfo h3 {
   margin: 0;
   font-size: 1.1rem;
-  color: #504442;
+  color: #d3cfce;
 }
 
 .cartInfo p {
@@ -104,7 +104,7 @@
 }
 
 .clearBtn:hover {
-  background: #676565;
+  background: #ababac;
 }
 
 .checkoutBtn {

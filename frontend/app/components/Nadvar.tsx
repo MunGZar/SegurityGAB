@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import styles from "@/styles/navbar.module.css";
 import { useAuth } from "../context/AuthContext";
 import Cart from "./Cart";
+import { link } from "fs";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -46,7 +47,7 @@ export default function Navbar() {
             ) : (
               <>
                 <span className="text-sm">
-                  {user.email} ({user.role})
+                  ({}{user.role} )
                 </span>
                 <button
                   onClick={handleLogout}
