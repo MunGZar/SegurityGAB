@@ -22,7 +22,7 @@ import { AdminModule } from './modules/users/admin/admin.module';
       port: 3306,
       username: 'root',
       password: 'Admin01@',
-      database: 'SegurityGAB',
+      database: 'seguritygab',
       entities: [User, Product],
       synchronize: true, // ⚠️ cambia a false en producción
       logging: true,

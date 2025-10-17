@@ -145,7 +145,7 @@ export default function AdminDashboard() {
         <div className={styles.productGrid}>
           {products.map((product) => (
             <div key={product.id} className={styles.productCard}>
-              <img src={product.image} alt={product.name} />
+              <img src={`http://localhost:3001${product.image}`} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>${product.price}</span>
