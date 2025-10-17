@@ -10,6 +10,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@types/bcrypt": "^6.0.0",
     "lucide-react": "^0.544.0",
     "next": "^15.5.4",
     "react": "^19.2.0",
