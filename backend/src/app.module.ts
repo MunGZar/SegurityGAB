@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
-import { User} from './modules/users/user_entity/user.entity';
+import { User } from './modules/users/user_entity/user.entity';
 import { Product } from './modules/products/products_entity/product_entity';
 
 // Modules
@@ -14,7 +14,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AdminModule } from './modules/users/admin/admin.module';
 
 @Module({
-  imports: [AuthModule,
+  imports: [
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -26,8 +27,9 @@ import { AdminModule } from './modules/users/admin/admin.module';
       synchronize: true, // ⚠️ cambia a false en producción
       logging: true,
     }),
-    UsersModule,    
-    ProductsModule,AdminModule
+    UsersModule,
+    ProductsModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],

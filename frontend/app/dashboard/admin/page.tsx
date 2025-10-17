@@ -63,7 +63,7 @@ export default function AdminDashboard() {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/admin/products", {
+      const res = await fetch("http://localhost:3001/products", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Error al obtener productos");
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
                 <td>{item.email}</td>
                 <td>{item.role}</td>
                 <td>
-                  <button onClick={() => setEditingUser(item)}>Editar</button>
+                  <button onClick={() => setEditingUser(item)} className={styles.buttonPrimary}>Editar</button>
                 </td>
               </tr>
             ))}
@@ -135,18 +135,22 @@ export default function AdminDashboard() {
 
         {/* Formulario de edición */}
         {editingProduct && (
-          <ProductForm fetchProducts={fetchProducts} editingItem={editingProduct} />
+          <ProductForm
+            fetchProducts={fetchProducts}
+            editingItem={editingProduct}
+            onUpdateComplete={() => setEditingProduct(null)}
+          />
         )}
 
         <div className={styles.productGrid}>
           {products.map((product) => (
             <div key={product.id} className={styles.productCard}>
-              <img src={product.image} alt={product.name} />
+              <img src={`http://localhost:3001${product.image}`} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>${product.price}</span>
               <div>
-                <button onClick={() => setEditingProduct(product)}>Editar</button>
+                <button onClick={() => setEditingProduct(product)} className={styles.buttonPrimary}>Editar</button>
               </div>
             </div>
           ))}
