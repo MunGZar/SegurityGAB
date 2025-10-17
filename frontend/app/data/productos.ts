@@ -44,13 +44,16 @@ export const productos: Producto[] = [
   },
   {
     id: 5,
+
     modelo: 'HAG-D5MP-FC-Z',
     descripcion: 'Cámara domo HDCVI de 5 MP con zoom óptico, audio y tecnología Full Color.',
+
     precio: "499.000",
     imagen: '/images/cam5.webp',
   },
   {
     id: 6,
+
     modelo: 'HAG-D5MP-FC-Z',
     descripcion: 'Cámara domo HDCVI de 5 MP con zoom óptico, audio y tecnología Full Color.',
     precio: "499.000",
@@ -69,5 +72,6 @@ export const productos: Producto[] = [
     descripcion: 'Cámara domo HDCVI de 5 MP con zoom óptico, audio y tecnología Full Color.',
     precio: "499.000",
     imagen: '/images/cam4.jpg',
+
   }
 ]
