@@ -1,23 +1,17 @@
-"use client";
+"use client"
 
-import { LogOut, User } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import styles from "@/styles/navbar.module.css";
-import { useAuth } from "../context/AuthContext";
-import Cart from "./Cart";
-import { link } from "fs";
+import { LogOut, User, ShoppingCart } from "lucide-react"
+import Link from "next/link"
+import styles from "@/styles/navbar.module.css"
+import { useAuth } from "../context/AuthContext"
+import { useCart } from "../context/CartContext"
+import { useState } from "react"
+import Cart from "./Cart" 
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const router = useRouter();
-
-  const handleLogout = () => {
-    logout();          // Cierra la sesión
-    router.push("/");  // Redirige al inicio
-  };
+  const { user, logout } = useAuth()
+  const { cart } = useCart()
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   return (
     <header className={styles.header}>
@@ -34,7 +28,16 @@ export default function Navbar() {
         <nav className={styles.nav}>
           <Link href="/">Inicio</Link>
           <Link href="/productos">Productos</Link>
-          <Link href="/carrito">Mi carrito</Link>
+
+         
+          <button
+          className={`${styles.navLink} ${styles.cart}`}
+          onClick={() => setIsCartOpen(true)} 
+        > 
+         <ShoppingCart size={20} />
+         <span className={styles.badge}>{cart.length}</span>
+          Mi Carrito
+        </button>
 
           <div className="flex items-center space-x-4">
             {!user ? (
@@ -50,10 +53,10 @@ export default function Navbar() {
                   {user.email} ({user.role})
                 </span>
                 <button
-                  onClick={handleLogout}
+                  onClick={logout}
                   className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm flex items-center gap-2"
                 >
-                  <LogOut size={16} /> Cerrar Sesión
+                  <LogOut size={16} /> Salir
                 </button>
               </>
             )}
@@ -61,7 +64,8 @@ export default function Navbar() {
         </nav>
       </div>
 
+  
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
-  );
+  )
 }
