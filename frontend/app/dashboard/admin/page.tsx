@@ -7,6 +7,7 @@ import styles from "@/styles/admin.module.css";
 import UserForm from "./../../components/UserForm";
 import ProductForm from "./../../components/ProductForm";
 
+
 // Interfaces
 interface UserItem {
   id: number;
@@ -34,6 +35,7 @@ export default function AdminDashboard() {
 
   const [editingUser, setEditingUser] = useState<UserItem | null>(null);
   const [editingProduct, setEditingProduct] = useState<ProductItem | null>(null);
+
 
   // Redirect if not admin
   useEffect(() => {
@@ -130,16 +132,15 @@ export default function AdminDashboard() {
       {/* 🔹 Gestión de Productos */}
       <section className={styles.section}>
         <h2 className={styles.subtitle}>Gestión de Productos</h2>
-        {/* Formulario para crear nuevo producto */}
-        <ProductForm fetchProducts={fetchProducts} />
 
-        {/* Formulario de edición */}
-        {editingProduct && (
+        {editingProduct ? (
           <ProductForm
             fetchProducts={fetchProducts}
             editingItem={editingProduct}
             onUpdateComplete={() => setEditingProduct(null)}
           />
+        ) : (
+          <ProductForm fetchProducts={fetchProducts} />
         )}
 
         <div className={styles.productGrid}>
@@ -149,8 +150,9 @@ export default function AdminDashboard() {
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>${product.price}</span>
-              <div>
+              <div className={styles.productCardActions}>
                 <button onClick={() => setEditingProduct(product)} className={styles.buttonPrimary}>Editar</button>
+                <button onClick={() => router.push(`/dashboard/admin/products/${product.id}`)} className={styles.buttonTertiary}>Añadir Información</button>
               </div>
             </div>
           ))}
