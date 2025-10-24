@@ -47,14 +47,14 @@ export default function Cart({
           </ul>
 
           <div className={styles.cartPanelFooter}>
-            <p>
-              <strong>Total:</strong> ${total.toLocaleString("es-CO")}
-            </p>
+            <p className={styles.total}>
+  <strong>Total:</strong> ${total.toLocaleString("es-CO")}
+</p>
             <button onClick={clearCart} className={styles.clearBtn}>
               Vaciar carrito
             </button>
             <button onClick={finalizarCompra} className={styles.checkoutBtn}>
-              Finalizar compra
+              Comprar ahora
             </button>
           </div>
         </>

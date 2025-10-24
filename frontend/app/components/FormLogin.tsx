@@ -41,7 +41,7 @@ export default function FormLogin() {
       if (userData.role === "admin") {
         router.push("/dashboard/admin");
       } else {
-        router.push("/dashboard");
+        router.push("/");
       }
     } catch (err) {
       console.error(err);
