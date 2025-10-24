@@ -45,7 +45,7 @@ export default function Navbar() {
 
         <nav className={styles.nav}>
           <Link href="/">Inicio</Link>
-          <Link href="/productos">Productos</Link>
+
 
           <button
             className={`${styles.navLink} ${styles.cart}`}

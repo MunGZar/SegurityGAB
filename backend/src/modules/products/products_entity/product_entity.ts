@@ -19,4 +19,10 @@ export class Product {
 
   @Column({ nullable: true })
   image: string;
+
+  @Column({ type: 'text', nullable: true })
+  long_description: string;
+
+  @Column({ nullable: true })
+  model: string;
 }
