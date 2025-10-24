@@ -14,6 +14,7 @@ export default function Navbar() {
   const { cart } = useCart()
   const [isCartOpen, setIsCartOpen] = useState(false)
   const router = useRouter()
+  const [searchTerm, setSearchTerm] = useState("")
 
   const handleProfileClick = () => {
     if (!user) return
@@ -31,6 +32,10 @@ export default function Navbar() {
     }
   }
 
+  const handleSearch = () => {
+    router.push(`/?search=${searchTerm}`);
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -39,8 +44,18 @@ export default function Navbar() {
         </Link>
 
         <div className={styles.search}>
-          <input type="text" placeholder="Buscar..." />
-          <button>Buscar</button>
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+          />
+          <button onClick={handleSearch}>Buscar</button>
         </div>
 
         <nav className={styles.nav}>
