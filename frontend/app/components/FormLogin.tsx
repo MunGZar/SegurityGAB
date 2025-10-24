@@ -22,7 +22,7 @@ export default function FormLogin() {
       const res = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({  email, password }),
       });
 
       const data = await res.json();
@@ -34,7 +34,7 @@ export default function FormLogin() {
       }
 
       // 🔹 Guardar usuario y token en AuthContext
-      const userData = { email: data.user.email, role: data.user.role };
+      const userData = { name: data.user.name, email: data.user.email, role: data.user.role };
       login(userData, data.access_token);
 
       // 🔹 Redirigir según rol
