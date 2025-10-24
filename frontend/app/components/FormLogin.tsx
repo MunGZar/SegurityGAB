@@ -86,6 +86,11 @@ export default function FormLogin() {
       >
         {loading ? "Cargando..." : "Iniciar Sesión"}
       </button>
+      <div className="mt-4">
+        <a href="/login/register" className="text-blue-700 hover:underline">
+          ¿No tienes una cuenta? Regístrate
+        </a>
+      </div>
     </div>
   );
 }

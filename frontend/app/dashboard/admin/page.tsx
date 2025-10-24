@@ -36,15 +36,19 @@ export default function AdminDashboard() {
   const [editingUser, setEditingUser] = useState<UserItem | null>(null);
   const [editingProduct, setEditingProduct] = useState<ProductItem | null>(null);
 
+<<<<<<< HEAD
 
   // Redirect if not admin
+=======
+  
+>>>>>>> origin/main
   useEffect(() => {
     if (!token || !user || user.role !== "admin") {
       router.push("/login");
     }
   }, [token, user, router]);
 
-  // 🔹 Fetch Users
+ 
   const fetchUsers = async () => {
     setLoading(true);
     try {
@@ -61,7 +65,7 @@ export default function AdminDashboard() {
     }
   };
 
-  // 🔹 Fetch Products
+ 
   const fetchProducts = async () => {
     setLoading(true);
     try {

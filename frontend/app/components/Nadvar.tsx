@@ -1,22 +1,35 @@
-"use client";
+"use client"
 
-import { LogOut, User } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import styles from "@/styles/navbar.module.css";
-import { useAuth } from "../context/AuthContext";
-import Cart from "./Cart";
+import { LogOut, User, ShoppingCart } from "lucide-react"
+import Link from "next/link"
+import styles from "@/styles/navbar.module.css"
+import { useAuth } from "../context/AuthContext"
+import { useCart } from "../context/CartContext"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import Cart from "./Cart"
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const router = useRouter();
+  const { user, logout } = useAuth()
+  const { cart } = useCart()
+  const [isCartOpen, setIsCartOpen] = useState(false)
+  const router = useRouter()
 
-  const handleLogout = () => {
-    logout();          // Cierra la sesión
-    router.push("/");  // Redirige al inicio
-  };
+  const handleProfileClick = () => {
+    if (!user) return
+
+    switch (user.role) {
+      case "admin":
+        router.push("/dashboard/admin") // Ruta para admin
+        break
+      case "user":
+        router.push("/dashboard/user") // Ruta para usuario estándar
+        break
+      default:
+        router.push("/perfil") // Ruta genérica por defecto
+        break
+    }
+  }
 
   return (
     <header className={styles.header}>
@@ -33,7 +46,15 @@ export default function Navbar() {
         <nav className={styles.nav}>
           <Link href="/">Inicio</Link>
           <Link href="/productos">Productos</Link>
-          <Link href="/carrito">Mi carrito</Link>
+
+          <button
+            className={`${styles.navLink} ${styles.cart}`}
+            onClick={() => setIsCartOpen(true)}
+          >
+            <ShoppingCart size={20} />
+            <span className={styles.badge}>{cart.length}</span>
+            Mi Carrito
+          </button>
 
           <div className="flex items-center space-x-4">
             {!user ? (
@@ -45,14 +66,19 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
-                <Link href="/dashboard/admin" className="text-sm">
-                  {user.email} ({user.role})
-                </Link>
+             
                 <button
-                  onClick={handleLogout}
+                  onClick={handleProfileClick}
+                  className="text-sm bg-gray-200 hover:bg-gray-300 px-3 py-1 rounded-md"
+                >
+                  Perfil
+                </button>
+
+                <button
+                  onClick={logout}
                   className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded-md text-sm flex items-center gap-2"
                 >
-                  <LogOut size={16} /> Cerrar Sesión
+                  <LogOut size={16} /> Salir
                 </button>
               </>
             )}
@@ -62,5 +88,5 @@ export default function Navbar() {
 
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
-  );
+  )
 }
