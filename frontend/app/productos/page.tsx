@@ -11,7 +11,7 @@ export default function ProductosPage() {
             <h1 className={styles.title}>Catálogo de Cámaras CCTV</h1>
 
             {/* Contenedor Grid */}
-           
+
 
             <div className={styles.grid}>
                 {productos.map((producto: Producto) => (
