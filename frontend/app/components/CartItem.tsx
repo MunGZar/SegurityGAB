@@ -8,6 +8,7 @@ type Props = {
   precio: number;
   imagen: string;
   cantidad: number;
+  nombre?: string;
 };
 
 export default function CartItem({ modelo, descripcion, precio, imagen, cantidad }: Props) {

@@ -9,19 +9,19 @@ export default function DashboardPage() {
   const { user, token } = useAuth();
 
   useEffect(() => {
-    // Si no hay usuario o token → redirige a login
+   
     if (!user || !token) {
       router.push("/page");
       return;
     }
 
-    // Si es admin → redirige a dashboard de admin
+    
     if (user.role === "admin") {
       router.push("/admin");
       return;
     }
 
-    // Usuario normal → redirige a la página principal de productos
+   
     if (user.role === "user") {
       router.push("/productos");
       return;

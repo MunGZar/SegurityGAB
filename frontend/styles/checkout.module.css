@@ -1,36 +1,544 @@
-.checkout {
-  max-width: 600px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background: #574242;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(16, 15, 15, 0.1);
+.checkoutContainer {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 3rem;
+  padding: 3rem 6rem;
+  background: #f8f9fb;
+  font-family: "Poppins", system-ui, sans-serif;
+  color: #222;
 }
 
-.checkout h1 {
-  color: #2ecc71;
+/* CONTENEDOR FORMULARIO */
+.checkoutForm {
+  background: #ffffff;
+  padding: 2.5rem 3rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.checkoutSummary {
+  background: #ffffff;
+  padding: 2.5rem 3rem;
+  border-radius: 1.2rem;
+  height: fit-content;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 2rem;
+}
+
+/* TITULOS */
+.section {
+  margin-bottom: 2.8rem;
+}
+
+.section h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+/* CAMPOS DE FORMULARIO */
+.section :global(input),
+.section :global(select) {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.7rem;
+  font-size: 0.95rem;
+  background: #fafafa;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.section :global(input:focus),
+.section :global(select:focus) {
+  border-color: #111;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+/* GRIDS */
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+/* CHECKBOX & RADIO */
+.checkboxLabel,
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #453a3a;
+  margin-bottom: 0.5rem;
+}
+
+/* CAJA ENVÍO */
+.envioBox {
+  border: 1px solid #e4e4e4;
+  border-radius: 0.8rem;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+}
+
+.envioBox:hover {
+  background: #f1f1f1;
+}
+
+/* === MÉTODO DE PAGO === */
+.paymentCard {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.paymentCardActive {
+  border-color: #0070f3;
+  background-color: #f8faff;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+.paymentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paymentIcons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.paymentIcons img {
+  width: 34px;
+  height: auto;
+}
+
+.moreMethods {
+  position: relative;
+}
+
+.moreBtn {
+  background: none;
+  border: none;
+  color: #0070f3;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.morePopup {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #1f1f1f;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.morePopup img {
+  width: 65px;
+  height: auto;
+}
+
+.browserIllustration {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.browserIllustration img {
+  width: 120px;
+  opacity: 0.8;
+}
+
+.paymentDescription {
+  font-size: 0.9rem;
+  color: #444;
+  text-align: center;
+}
+
+
+/* BOTÓN DE PAGO */
+.payButton {
+  width: 100%;
+  background: linear-gradient(135deg, #1d06a3, #2905cb);
+  color: #fff;
+  padding: 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.payButton:hover {
+  background: linear-gradient(135deg, #222, #000);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ENLACES DE PIE */
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 2.5rem;
+}
+
+.footerLinks a {
+  font-size: 0.88rem;
+  color: #0c33de;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.footerLinks a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* PRODUCTOS DERECHA */
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+.cartItem img {
+  width: 70px;
+  height: 70px;
+  border-radius: 0.6rem;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cartItem h4 {
+  font-size: 1rem;
+  margin: 0;
+  color: #222;
+}
+
+.cartItem p {
+  margin: 0;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.cartItem span {
+  margin-left: auto;
+  font-weight: 500;
+  color: #333;
+}
+
+/* TOTALES */
+.totalBox {
+  margin-top: 2rem;
+  background: #fafafa;
+  padding: 1rem 1.5rem;
+  border-radius: 0.8rem;
+}
+
+.totalBox > div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.total {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.impuesto {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .checkoutContainer {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+
+  .checkoutSummary {
+    position: relative;
+    top: 0;
+    margin-top: 2rem;
+  }
+}
+
+/* === MÉTODOS DE ENVÍO === */
+.shippingMethod {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shippingLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.shippingLeft strong {
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.shippingSubtext {
+  color: #555;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* === TARJETAS GENERALES === */
+.card {
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: #0070f3;
+}
+
+.cardActive {
+  border-color: #0070f3;
+  background-color: #f8faff;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+
+/* === DIRECCIÓN DE FACTURACIÓN === */
+.billingOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.6rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.billingOption:hover {
+  border-color: #0070f3;
+}
+
+.billingOptionActive {
+  border-color: #0070f3;
+  background-color: #f8faff;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+/* === SECCIÓN CONTACTO === */
+.contactHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.checkout p {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
-}
-
-.homeBtn {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 0.8rem 1.5rem;
-  background: #3498db;
-  color: #f3f0f0;
+.linkLogin {
+  font-size: 0.9rem;
+  color: #0070f3;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: background 0.3s;
+  transition: color 0.2s;
 }
 
-.homeBtn:hover {
-  background: #2980b9;
+.linkLogin:hover {
+  text-decoration: underline;
+  color: #0052b1;
+}
+
+.checkboxRow {
+  margin-top: 0.8rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.checkboxLabel input {
+  width: 18px;
+  height: 18px;
+  accent-color: #0070f3;
+}
+
+/* === ENTREGA === */
+.entregaSection {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.entregaTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.billingOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.6rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.billingOption:hover {
+  border-color: #0070f3;
+}
+
+.billingOptionActive {
+  border-color: #0070f3;
+  background-color: #f8faff;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+/* === ENTREGA === */
+.billingOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.6rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.billingOption:hover {
+  border-color: #0070f3;
+}
+
+.billingOptionActive {
+  border-color: #0070f3;
+  background-color: #f8faff;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+}
+
+.billingOption input[type="radio"] {
+  accent-color: #0070f3;
+}
+
+
+.moreMethod {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón +4 */
+.moreBtn {
+  cursor: pointer;
+  font-weight: 600;
+  color: #0070f3;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.moreBtn:hover {
+  background-color: #f2f7ff;
+}
+
+/* Tooltip (el recuadro negro con íconos) */
+.moreDropdown {
+  position: absolute;
+  bottom: 130%; /* Aparece arriba del botón */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background-color: #111;
+  color: white;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+/* Íconos dentro del tooltip */
+.moreDropdown img {
+  width: 40px;
+  height: 25px;
+  object-fit: contain;
+  background-color: white;
+  border-radius: 4px;
+  padding: 3px;
+}
+
+/* Triangulito debajo del recuadro */
+.triangle {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #111;
+}
+
+/* Muestra el menú al pasar el mouse */
+.moreMethod:hover .moreDropdown {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
 }
 

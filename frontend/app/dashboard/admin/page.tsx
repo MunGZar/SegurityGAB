@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState, ChangeEvent, FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
 import styles from "@/styles/admin.module.css";
+import UserForm from "./../../components/UserForm";
+import ProductForm from "./../../components/ProductForm";
 
 // Interfaces
 interface UserItem {
@@ -21,66 +23,56 @@ interface ProductItem {
   image: string;
 }
 
-interface UserFormState {
-  name: string;
-  email: string;
-  role: "user" | "admin";
-}
-
-interface ProductFormState {
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-}
-
 export default function AdminDashboard() {
   const { user, token } = useAuth();
+  const router = useRouter();
+
   const [items, setItems] = useState<UserItem[]>([]);
   const [products, setProducts] = useState<ProductItem[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const [formUser, setFormUser] = useState<UserFormState>({
-    name: "",
-    email: "",
-    role: "user",
-  });
-  const [formProduct, setFormProduct] = useState<ProductFormState>({
-    name: "",
-    description: "",
-    price: "",
-    image: "",
-  });
+  const [editingUser, setEditingUser] = useState<UserItem | null>(null);
+  const [editingProduct, setEditingProduct] = useState<ProductItem | null>(null);
 
-  const [editingUserId, setEditingUserId] = useState<number | null>(null);
-  const [editingProductId, setEditingProductId] = useState<number | null>(null);
-
-  const router = useRouter();
+  // Redirect if not admin
+  useEffect(() => {
+    if (!token || !user || user.role !== "admin") {
+      router.push("/login");
+    }
+  }, [token, user, router]);
 
   // 🔹 Fetch Users
   const fetchUsers = async () => {
+    setLoading(true);
     try {
       const res = await fetch("http://localhost:3001/admin/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) throw  Error("Error fetching users");
+      if (!res.ok) throw new Error("Error al obtener usuarios");
       const data = await res.json();
       setItems(data);
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   // 🔹 Fetch Products
   const fetchProducts = async () => {
+    setLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/admin/products", {
+      const res = await fetch("http://localhost:3001/products", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!res.ok) throw new Error("Error fetching products");
+      if (!res.ok) throw new Error("Error al obtener productos");
       const data = await res.json();
       setProducts(data);
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,133 +84,28 @@ export default function AdminDashboard() {
     }
   }, [token]);
 
-  // 🔹 Handlers Users
-  const handleUserChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormUser({ ...formUser, [e.target.name]: e.target.value });
-  };
-
-  const handleUserSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      if (!token) return;
-      if (editingUserId !== null) {
-        await fetch(`http://localhost:3001/admin/users/${editingUserId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-          body: JSON.stringify(formUser),
-        });
-      } else {
-        await fetch("http://localhost:3001/admin/users", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-          body: JSON.stringify(formUser),
-        });
-      }
-      setFormUser({ name: "", email: "", role: "user" });
-      setEditingUserId(null);
-      fetchUsers();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleUserEdit = (item: UserItem) => {
-    setFormUser({ name: item.name, email: item.email, role: item.role });
-    setEditingUserId(item.id);
-  };
-
-  const handleUserDelete = async (id: number) => {
-    if (!token) return;
-    if (confirm("¿Deseas eliminar este usuario?")) {
-      try {
-        await fetch(`http://localhost:3001/admin/users/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        fetchUsers();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-
-  // 🔹 Handlers Products
-  const handleProductChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormProduct({ ...formProduct, [e.target.name]: e.target.value });
-  };
-
-  const handleProductSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      if (!token) return;
-      if (editingProductId !== null) {
-        await fetch(`http://localhost:3001/admin/products/${editingProductId}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-          body: JSON.stringify({ ...formProduct, price: Number(formProduct.price) }),
-        });
-      } else {
-        await fetch("http://localhost:3001/admin/products", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-          body: JSON.stringify({ ...formProduct, price: Number(formProduct.price) }),
-        });
-      }
-      setFormProduct({ name: "", description: "", price: "", image: "" });
-      setEditingProductId(null);
-      fetchProducts();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const handleProductEdit = (item: ProductItem) => {
-    setFormProduct({
-      name: item.name,
-      description: item.description,
-      price: item.price.toString(),
-      image: item.image,
-    });
-    setEditingProductId(item.id);
-  };
-
-  const handleProductDelete = async (id: number) => {
-    if (!token) return;
-    if (confirm("¿Deseas eliminar este producto?")) {
-      try {
-        await fetch(`http://localhost:3001/admin/products/${id}`, {
-          method: "DELETE",
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        fetchProducts();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-  };
-
-  if (!user || user.role !== "admin")
+  if (!user || user.role !== "admin") {
     return <p className="text-red-500 text-center mt-10">No autorizado</p>;
+  }
 
   return (
-    <div className={styles.container}>
-      <br />
-      <br />
-      <br />
+    <div className={styles.container}><br /><br />
       <h1 className={styles.title}>Panel de Administración</h1>
 
-      {/* 🔹 Usuarios */}
+      {loading && <p className={styles.loading}>Cargando...</p>}
+      {error && <p className={styles.error}>{error}</p>}
+
+      {/* 🔹 Gestión de Usuarios */}
       <section className={styles.section}>
         <h2 className={styles.subtitle}>Gestión de Usuarios</h2>
-        <form className={styles.form} onSubmit={handleUserSubmit}>
-          <input name="name" placeholder="Nombre" value={formUser.name} onChange={handleUserChange} required />
-          <input name="email" placeholder="Email" value={formUser.email} onChange={handleUserChange} required />
-          <select name="role" value={formUser.role} onChange={handleUserChange}>
-            <option value="user">Usuario</option>
-            <option value="admin">Admin</option>
-          </select>
-          <button type="submit">{editingUserId ? "Actualizar" : "Crear"}</button>
-        </form>
+        {/* Formulario para crear nuevo usuario */}
+        <UserForm fetchUsers={fetchUsers} />
+
+        {/* Formulario de edición */}
+        {editingUser && (
+          <UserForm fetchUsers={fetchUsers} editingItem={editingUser} />
+        )}
+
         <table className={styles.table}>
           <thead>
             <tr>
@@ -228,10 +115,11 @@ export default function AdminDashboard() {
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
-                <td>{item.name}</td><td>{item.email}</td><td>{item.role}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.role}</td>
                 <td>
-                  <button className={styles.edit} onClick={() => handleUserEdit(item)}>Editar</button>
-                  <button className={styles.delete} onClick={() => handleUserDelete(item.id)}>Eliminar</button>
+                  <button onClick={() => setEditingUser(item)} className={styles.buttonPrimary}>Editar</button>
                 </td>
               </tr>
             ))}
@@ -239,26 +127,30 @@ export default function AdminDashboard() {
         </table>
       </section>
 
-      {/* 🔹 Productos */}
+      {/* 🔹 Gestión de Productos */}
       <section className={styles.section}>
         <h2 className={styles.subtitle}>Gestión de Productos</h2>
-        <form className={styles.form} onSubmit={handleProductSubmit}>
-          <input name="name" placeholder="Nombre del producto" value={formProduct.name} onChange={handleProductChange} required />
-          <textarea name="description" placeholder="Descripción" value={formProduct.description} onChange={handleProductChange} required />
-          <input type="number" name="price" placeholder="Precio" value={formProduct.price} onChange={handleProductChange} required />
-          <input name="image" placeholder="URL de la Imagen" value={formProduct.image} onChange={handleProductChange} required />
-          <button type="submit">{editingProductId ? "Actualizar" : "Crear"}</button>
-        </form>
+        {/* Formulario para crear nuevo producto */}
+        <ProductForm fetchProducts={fetchProducts} />
+
+        {/* Formulario de edición */}
+        {editingProduct && (
+          <ProductForm
+            fetchProducts={fetchProducts}
+            editingItem={editingProduct}
+            onUpdateComplete={() => setEditingProduct(null)}
+          />
+        )}
+
         <div className={styles.productGrid}>
           {products.map((product) => (
             <div key={product.id} className={styles.productCard}>
-              <img src={product.image} alt={product.name} />
+              <img src={`http://localhost:3001${product.image}`} alt={product.name} />
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>${product.price}</span>
-              <div className={styles.actions}>
-                <button className={styles.edit} onClick={() => handleProductEdit(product)}>Editar</button>
-                <button className={styles.delete} onClick={() => handleProductDelete(product.id)}>Eliminar</button>
+              <div>
+                <button onClick={() => setEditingProduct(product)} className={styles.buttonPrimary}>Editar</button>
               </div>
             </div>
           ))}
@@ -267,4 +159,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
- 

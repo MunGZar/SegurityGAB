@@ -1,166 +1,234 @@
 .container {
   padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
-  font-family: "Poppins", sans-serif;
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0f172a;
   text-align: center;
   margin-bottom: 2rem;
-  font-weight: bold;
-  color: #1d3557;
-}
-
-.section {
-  margin-bottom: 3rem;
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .subtitle {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #457b9d;
+  font-weight: 600;
+  margin: 1rem 0;
+  color: #1e293b;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  margin-bottom: 2rem;
-}
-
-.form input,
-.form select,
-.form textarea {
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-.form button {
-  background: linear-gradient(135deg, #1d3557, #457b9d);
-  color: white;
-  padding: 0.8rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s ease;
-}
-
-.form button:hover {
-  background: linear-gradient(135deg, #457b9d, #1d3557);
+.section {
+  margin-bottom: 3rem;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .table th,
 .table td {
-  padding: 0.8rem;
-  border: 1px solid #e0e0e0;
-  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
 }
 
 .table th {
-  background: #1d3557;
+  background: #0ea5e9;
   color: white;
 }
 
-.edit {
-  background: #f4a261;
+.formCard {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.formTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+.input,
+.textarea,
+.select {
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #0ea5e9;
+  outline: none;
+}
+
+.textarea {
+  min-height: 80px;
+}
+
+.buttonPrimary {
+  background: #0ea5e9;
   color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  transition: 0.3s;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s;
 }
 
-.edit:hover {
-  background: #e76f51;
-}
-
-.delete {
-  background: #e63946;
-  color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.delete:hover {
-  background: #a4161a;
+.buttonPrimary:hover {
+  background: #0284c7;
 }
 
 .productGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .productCard {
   background: white;
-  border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   text-align: center;
-  transition: transform 0.3s;
-}
-
-.productCard:hover {
-  transform: translateY(-5px);
 }
 
 .productCard img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  max-width: 100%;
   border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.productCard h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.productCard p {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-}
-
-.productCard span {
-  display: block;
-  font-weight: bold;
-  color: #1d3557;
   margin-bottom: 0.5rem;
 }
 
 .actions {
   display: flex;
+  gap: 1rem;
   justify-content: center;
-  gap: 0.5rem;
 }
-.actions button {
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+
+.deleteBtn {
+  background: #ff4444;
   color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 0.6rem;
+  font-size: 1rem;
   font-weight: bold;
-  transition: 0.3s;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.deleteBtn:hover {
+  background: #cc0000;
+  transform: scale(1.03);
+}
+
+/* 🔥 Tarjeta especial para crear usuario */
+.createUserCard {
+  background: linear-gradient(145deg, #ffffff, #f1f5f9);
+  border: 2px solid #0ea5e9;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.2);
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.createUserCard:hover {
+  transform: translateY(-5px);
+}
+
+.createUserCard .formTitle {
+  color: #0ea5e9;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+/* Estilos específicos para la sección de productos */
+.createProductCard {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.createProductCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.textarea {
+  padding: 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  width: 100%;
+  background: #f8fafc;
+  min-height: 100px;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.textarea:focus {
+  border-color: #0ea5e9;
+  outline: none;
+  background: #ffffff;
+}
+.buttonSecondary {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s;
+}
+
+.imagePreview {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.imagePreview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.fileLabel {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  background: #f1f5f9;
+  color: #0f172a;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 1rem;
+  transition: background 0.3s;
+}
+
+.fileLabel:hover {
+  background: #e2e8f0;
+}
+
+.fileInput {
+  display: none;
 }
