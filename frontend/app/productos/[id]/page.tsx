@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import styles from "@/styles/productCard.module.css"; // Reusing some styles
+import styles from "@/styles/productCard.module.css";
 
 export default function ProductDetailPage() {
   const params = useParams();
