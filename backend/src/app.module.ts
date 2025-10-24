@@ -24,7 +24,7 @@ import { AdminModule } from './modules/users/admin/admin.module';
       password: 'Admin01@',
       database: 'SegurityGAB',
       entities: [User, Product],
-      synchronize: true, // ⚠️ cambia a false en producción
+      synchronize: true, // cambia a false en producción
       logging: true,
     }),
     UsersModule,
