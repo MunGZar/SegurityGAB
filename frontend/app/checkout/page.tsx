@@ -18,7 +18,7 @@ export default function CheckoutPage() {
   const total = subtotal + envio;
 
   const handlePago = () => {
-    alert("✅ Simulación de pago: Compra realizada con éxito.");
+    alert(" Simulación de pago: Compra realizada con éxito.");
     clearCart();
   };
 
