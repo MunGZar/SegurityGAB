@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
-
+import { User } from './modules/users/user_entity/user.entity';
 import { Product } from './modules/products/products_entity/product_entity';
 
 // Modules
