@@ -231,4 +231,29 @@
 
 .fileInput {
   display: none;
+
+}
+
+
+
+.buttonTertiary {
+  background: #10b981; /* Green */
+  color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.3s;
+  border: none;
+}
+
+.buttonTertiary:hover {
+  background: #059669;
+}
+
+.productCardActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
 }

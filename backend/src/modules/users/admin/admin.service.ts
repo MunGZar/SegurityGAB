@@ -1,9 +1,13 @@
-import { Injectable } from '@nestjs/common';
+
+import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './../user_entity/user.entity';
 import * as bcrypt from 'bcrypt';
-import {  UpdateUserDto } from './../dto/update-user.dto';
+
+import { UpdateUserDto } from './../dto/update-user.dto';
+
 import { CreateUserDto } from './../dto/create-user.dto';
 
 @Injectable()
@@ -23,14 +27,25 @@ export class AdminService {
     return this.userRepo.save(user);
   }
 
-  async update(id: number, data: UpdateUserDto): Promise<any> {
+
+  async update(id: number, data: UpdateUserDto): Promise<User> {
+    const user = await this.userRepo.findOne({ where: { id } });
+    if (!user) throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+
     if (data.password) {
       data.password = await bcrypt.hash(data.password, 10);
     }
-    return this.userRepo.update(id, data);
+
+    Object.assign(user, data);
+    return this.userRepo.save(user);
   }
 
-  async remove(id: number): Promise<any> {
-    return this.userRepo.delete(id);
+  async remove(id: number): Promise<{ message: string }> {
+    const user = await this.userRepo.findOne({ where: { id } });
+    if (!user) throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+
+    await this.userRepo.remove(user);
+    return { message: `Usuario con id ${id} eliminado correctamente` };
+
   }
 }

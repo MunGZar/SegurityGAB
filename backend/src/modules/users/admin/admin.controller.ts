@@ -1,37 +1,39 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards } from '@nestjs/common';
-import { AdminService } from './admin.service';
-import { JwtAuthGuard } from '.././../auth/strategies/jwt-auth.guard';
-import { RolesGuard } from '../../auth/decoradores/roles.guard';
-import { Roles } from '../../auth/decoradores/roles.decoradores';
-import {  UpdateUserDto } from './../dto/update-user.dto';
-import { CreateUserDto } from './../dto/create-user.dto';
 
-@Controller('admin/items')
-@UseGuards(JwtAuthGuard, RolesGuard)
+import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { AdminService } from './admin.service';
+import { CreateUserDto } from './../dto/create-user.dto';
+import { UpdateUserDto } from './../dto/update-user.dto';
+
+@Controller('admin/users')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
+  // Obtener todos los usuarios
   @Get()
-  @Roles('admin')
+
   findAll() {
     return this.adminService.findAll();
   }
 
+
+  // Crear usuario
   @Post()
-  @Roles('admin')
+
   create(@Body() data: CreateUserDto) {
     return this.adminService.create(data);
   }
 
+
+  // Actualizar usuario
   @Put(':id')
-  @Roles('admin')
   update(@Param('id') id: string, @Body() data: UpdateUserDto) {
-    return this.adminService.update(+id, data);
+    return this.adminService.update(Number(id), data);
   }
 
+  // Eliminar usuario
   @Delete(':id')
-  @Roles('admin')
   remove(@Param('id') id: string) {
-    return this.adminService.remove(+id);
+    return this.adminService.remove(Number(id));
+
   }
 }

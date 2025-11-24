@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "@/styles/checkout.module.css";
 import { useCart } from "@/app/context/CartContext";
-import { FaTruck, FaShoppingBag } from "react-icons/fa"; // ✅ Librería de íconos
+import { FaTruck, FaShoppingBag } from "react-icons/fa"; // íconos
 
 
 export default function CheckoutPage() {
@@ -26,13 +26,15 @@ export default function CheckoutPage() {
 
   return (
     <div className={styles.checkoutContainer}>
-      {/* IZQUIERDA: FORMULARIO */}
+
+      {/* IZQUIERDA */}
+
       <div className={styles.checkoutForm}>
         {/* CONTACTO */}
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
             <h2>Contacto</h2>
-            
+
           </div>
 
           <input
@@ -44,6 +46,7 @@ export default function CheckoutPage() {
             <input type="checkbox" /> Autorizo Tratamiento de datos Personales
           </label>
         </div>
+
 {/* ENTREGA */}
 <div className={styles.section}>
   <h2>Entrega</h2>
@@ -92,6 +95,7 @@ export default function CheckoutPage() {
       />
     </label>
   </div>
+
           <select className={styles.inputField}>
             <option>Colombia</option>
           </select>
@@ -101,10 +105,12 @@ export default function CheckoutPage() {
             <input className={styles.inputField} placeholder="Apellidos" />
           </div>
 
+
           <input
             className={styles.inputField}
             placeholder="Documento de Identidad"
           />
+
           <input className={styles.inputField} placeholder="Dirección" />
           <input
             className={styles.inputField}
@@ -124,9 +130,11 @@ export default function CheckoutPage() {
 
           <input className={styles.inputField} placeholder="Teléfono" />
 
+
           <label className={styles.checkboxLabel}>
             <input type="checkbox" /> Guardar mi información y consultar más
             rápidamente la próxima vez
+
           </label>
         </div>
 
@@ -143,6 +151,7 @@ export default function CheckoutPage() {
               <span>$ 14.000,00</span>
             </div>
           </div>
+
         </div>  
 
        {/* MÉTODO DE PAGO */}
@@ -163,10 +172,12 @@ export default function CheckoutPage() {
         <img src="/payments/american express.png" alt="America express" />
 
         {/* Botón +4 desplegable */}
+
     <div className={`${styles.moreMethod}`}>
   <span className={styles.moreBtn}>+4 </span>
 
   <div className={styles.moreDropdown}>
+
               <img src="/payments/nequi.png" alt="Nequi" />
               <img src="/payments/pse.png" alt="PSE" />
               <img src="/payments/daviplata.png" alt="Daviplata" />
@@ -193,6 +204,7 @@ export default function CheckoutPage() {
 </div>
 
 
+
         {/* DIRECCIÓN DE FACTURACIÓN */}
         <div className={styles.section}>
           <h2>Dirección de facturación</h2>
@@ -207,7 +219,9 @@ export default function CheckoutPage() {
               name="facturacion"
               checked={metodoFacturacion === "mismo"}
               onChange={() => setMetodoFacturacion("mismo")}
+
             />
+
             La misma dirección de envío
           </label>
 
@@ -221,17 +235,25 @@ export default function CheckoutPage() {
               name="facturacion"
               checked={metodoFacturacion === "distinta"}
               onChange={() => setMetodoFacturacion("distinta")}
+
             />
             Usar una dirección de facturación distinta
           </label>
         </div>
 
         {/* BOTÓN DE PAGO */}
-        <button onClick={handlePago} className={styles.payButton}>
-          Pagar ahora
-        </button>
 
-        {/* ENLACES LEGALES */}
+            />{" "}
+            Usar una dirección distinta
+          </label>
+        </div>
+
+        {/* BOTÓN PAGO */}
+
+
+
+        {/* LINKS */}
+
         <div className={styles.footerLinks}>
           <a>Política de reembolso</a>
           <a>Envío</a>
@@ -241,7 +263,9 @@ export default function CheckoutPage() {
         </div>
       </div>
 
+
       {/* DERECHA: PRODUCTOS */}
+
       <div className={styles.checkoutSummary}>
         {cart.length === 0 ? (
           <p>Tu carrito está vacío</p>
@@ -275,8 +299,10 @@ export default function CheckoutPage() {
                 <strong>COP ${total.toLocaleString("es-CO")}</strong>
               </div>
               <p className={styles.impuesto}>
+
                 Incluye ${Math.round(total * 0.16).toLocaleString("es-CO")} de
                 impuestos
+
               </p>
             </div>
           </>

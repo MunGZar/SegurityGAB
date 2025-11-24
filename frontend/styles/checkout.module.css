@@ -464,10 +464,86 @@
   border-color: #0070f3;
   background-color: #f8faff;
   box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.1);
+
 }
 
 .billingOption input[type="radio"] {
   accent-color: #0070f3;
+}
+
+
+.moreMethod {
+  position: relative;
+  display: inline-block;
+}
+
+/* Botón +4 */
+.moreBtn {
+  color: #0070f3;
+  font-weight: 600;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.moreBtn:hover {
+  color: #0052b1;
+}
+
+/* Tooltip oculto por defecto */
+.moreDropdown {
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: #000;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  width: 130px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* Muestra el tooltip al pasar el mouse */
+.moreMethod:hover .moreDropdown {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* Íconos dentro del tooltip */
+.moreDropdown img {
+  width: 60px;
+  height: auto;
+  background-color: white;
+  border-radius: 6px;
+  padding: 4px;
+  object-fit: contain;
+}
+
+/* Triangulito */
+.triangle {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #000;
+
 }
 
 

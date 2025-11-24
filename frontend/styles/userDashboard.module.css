@@ -1,0 +1,122 @@
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background: #f6f9fc;
+}
+
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #0056ff, #002b80);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.userInfo {
+  text-align: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 3px solid white;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 40px;
+}
+
+.section {
+  margin-bottom: 40px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.cardsContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  background: #eaf1ff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.buttonPrimary {
+  background: #0056ff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttonPrimary:hover {
+  background: #003bb5;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.wishlistGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.wishlistItem {
+  background: #f8faff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.wishlistItem img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.error {
+  color: red;
+}
+
+.notAuthorized {
+  color: red;
+  text-align: center;
+  margin-top: 50px;
+}

@@ -22,7 +22,9 @@ export default function FormLogin() {
       const res = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+
+        body: JSON.stringify({  email, password }),
+
       });
 
       const data = await res.json();
@@ -34,14 +36,18 @@ export default function FormLogin() {
       }
 
       // 🔹 Guardar usuario y token en AuthContext
-      const userData = { email: data.user.email, role: data.user.role };
+
+      const userData = { name: data.user.name, email: data.user.email, role: data.user.role };
+
       login(userData, data.access_token);
 
       // 🔹 Redirigir según rol
       if (userData.role === "admin") {
         router.push("/dashboard/admin");
       } else {
-        router.push("/dashboard");
+
+        router.push("/");
+
       }
     } catch (err) {
       console.error(err);
@@ -86,6 +92,13 @@ export default function FormLogin() {
       >
         {loading ? "Cargando..." : "Iniciar Sesión"}
       </button>
+
+      <div className="mt-4">
+        <a href="/login/register" className="text-blue-700 hover:underline">
+          ¿No tienes una cuenta? Regístrate
+        </a>
+      </div>
+
     </div>
   );
 }

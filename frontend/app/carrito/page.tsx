@@ -45,7 +45,9 @@ export default function CarritoPage() {
                 Vaciar carrito
               </button>
               <button onClick={finalizarCompra} className={styles.checkoutBtn}>
+
                 Pagar pedido
+
               </button>
             </div>
           </div>

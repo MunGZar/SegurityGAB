@@ -5,14 +5,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
 
-import { User } from './modules/users/user_entity/user.entity';
-
 import { Product } from './modules/products/products_entity/product_entity';
 
 // Modules
 import { UsersModule } from './modules/users/users.module';
 import { ProductsModule } from './modules/products/products.module';
 import { AuthModule } from './modules/auth/auth.module';
+
+import { AdminModule } from './modules/users/admin/admin.module';
+
 
 @Module({
 
@@ -27,14 +28,14 @@ import { AuthModule } from './modules/auth/auth.module';
       password: 'Admin01@',
       database: 'SegurityGAB',
       entities: [User, Product],
-      synchronize: true, // ⚠️ cambia a false en producción
+
+      synchronize: true, // cambia a false en producción
       logging: true,
     }),
- 
-
     UsersModule,
-
     ProductsModule,
+    AdminModule,
+
   ],
   controllers: [AppController],
   providers: [AppService],
