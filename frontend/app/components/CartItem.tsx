@@ -8,6 +8,7 @@ type Props = {
   precio: number;
   imagen: string;
   cantidad: number;
+  nombre?: string;
 };
 
 export default function CartItem({ modelo, descripcion, precio, imagen, cantidad }: Props) {
@@ -20,7 +21,9 @@ export default function CartItem({ modelo, descripcion, precio, imagen, cantidad
       <div className={styles.cartInfo}>
         <h4>{modelo}</h4>
         <p>{descripcion}</p>
-        <p>${precio.toLocaleString("es-CO")}</p>
+       <p className={styles.cartPrice}>
+      ${precio.toLocaleString("es-CO")}
+      </p>
 
        
         <div className={styles.quantityControls}>

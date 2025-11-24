@@ -81,6 +81,7 @@ export default function Navbar() {
               </Link>
             ) : (
               <>
+
              
                 <button
                   onClick={handleProfileClick}
@@ -88,6 +89,7 @@ export default function Navbar() {
                 >
                   Perfil
                 </button>
+
 
                 <button
                   onClick={logout}

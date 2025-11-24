@@ -1,6 +1,8 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { Producto } from "../data/productos";
+
+
 
 type CartItem = Producto & { cantidad: number };
 
@@ -17,10 +19,24 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  
+  // 🧠 Cargar carrito desde localStorage al iniciar
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+  // 💾 Guardar carrito en localStorage cada vez que cambie
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const addToCart = (producto: Producto) => {
     setCart((prevCart) => {
-      const itemExistente = prevCart.find((item) => item.modelo === producto.modelo);
+      const itemExistente = prevCart.find(
+        (item) => item.modelo === producto.modelo
+      );
       if (itemExistente) {
         return prevCart.map((item) =>
           item.modelo === producto.modelo
@@ -32,15 +48,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
- 
   const removeFromCart = (modelo: string) => {
     setCart((prevCart) => prevCart.filter((item) => item.modelo !== modelo));
   };
 
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem("cart"); // 🧹 limpiar del almacenamiento también
+  };
 
-  const clearCart = () => setCart([]);
-
-  
   const updateQuantity = (modelo: string, cantidad: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>

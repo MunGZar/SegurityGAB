@@ -14,7 +14,7 @@ export default function CarritoPage() {
   );
 
   const finalizarCompra = () => {
-    clearCart();
+    
     router.push("/checkout"); 
   };
 
@@ -45,7 +45,9 @@ export default function CarritoPage() {
                 Vaciar carrito
               </button>
               <button onClick={finalizarCompra} className={styles.checkoutBtn}>
-                Comprar ahora
+
+                Pagar pedido
+
               </button>
             </div>
           </div>

@@ -8,6 +8,8 @@ import UserForm from "./../../components/UserForm";
 import ProductForm from "./../../components/ProductForm";
 
 
+
+
 // Interfaces
 interface UserItem {
   id: number;
@@ -38,11 +40,15 @@ export default function AdminDashboard() {
 
   // Redirect if not admin
 
+
+
   useEffect(() => {
     if (!token || !user || user.role !== "admin") {
       router.push("/login");
     }
   }, [token, user, router]);
+
+
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -60,7 +66,8 @@ export default function AdminDashboard() {
     }
   };
 
- 
+
+
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -132,14 +139,18 @@ export default function AdminDashboard() {
       <section className={styles.section}>
         <h2 className={styles.subtitle}>Gestión de Productos</h2>
 
+
         {editingProduct ? (
+
           <ProductForm
             fetchProducts={fetchProducts}
             editingItem={editingProduct}
             onUpdateComplete={() => setEditingProduct(null)}
           />
+
         ) : (
           <ProductForm fetchProducts={fetchProducts} />
+
         )}
 
         <div className={styles.productGrid}>
@@ -149,9 +160,11 @@ export default function AdminDashboard() {
               <h3>{product.name}</h3>
               <p>{product.description}</p>
               <span>${product.price}</span>
+
               <div className={styles.productCardActions}>
                 <button onClick={() => setEditingProduct(product)} className={styles.buttonPrimary}>Editar</button>
                 <button onClick={() => router.push(`/dashboard/admin/products/${product.id}`)} className={styles.buttonTertiary}>Añadir Información</button>
+
               </div>
             </div>
           ))}

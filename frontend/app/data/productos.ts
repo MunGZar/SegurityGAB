@@ -41,5 +41,7 @@ export const productos: Producto[] = [
     descripcion: 'Cámara domo HDCVI de 5 MP con zoom óptico, audio y tecnología Full Color.',
     precio: "499000",
     imagen: '/images/cam4.jpg',
+
+
   }
 ]

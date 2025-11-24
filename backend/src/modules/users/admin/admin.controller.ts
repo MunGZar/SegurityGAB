@@ -1,3 +1,4 @@
+
 import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateUserDto } from './../dto/create-user.dto';
@@ -9,15 +10,19 @@ export class AdminController {
 
   // Obtener todos los usuarios
   @Get()
+
   findAll() {
     return this.adminService.findAll();
   }
 
+
   // Crear usuario
   @Post()
+
   create(@Body() data: CreateUserDto) {
     return this.adminService.create(data);
   }
+
 
   // Actualizar usuario
   @Put(':id')
@@ -29,5 +34,6 @@ export class AdminController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.adminService.remove(Number(id));
+
   }
 }
