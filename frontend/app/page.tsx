@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -6,6 +7,7 @@ import styles from '@/styles/productos.module.css';
 import ProductCard from './components/ProductCard';
 import { productos as localProductos } from './data/productos';
 import FilterSidebar from './components/FilterSidebar';
+
 
 interface DbProduct {
   id: number;
@@ -18,11 +20,13 @@ interface DbProduct {
 
 export default function ProductosPage() {
   const [dbProducts, setDbProducts] = useState<DbProduct[]>([]);
+
   const [cameraTypeFilter, setCameraTypeFilter] = useState<string>('');
   const [resolutionFilter, setResolutionFilter] = useState<string>('');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -38,6 +42,7 @@ export default function ProductosPage() {
     };
 
     fetchProducts();
+
   }, []);
 
   const filterProducts = (product: any) => {
@@ -62,6 +67,7 @@ export default function ProductosPage() {
 
   const filteredLocalProducts = localProductos.filter(filterProducts);
   const filteredDbProducts = dbProducts.filter(filterProducts);
+
 
   return (
     <section className={styles.section}>
@@ -88,6 +94,7 @@ export default function ProductosPage() {
         </svg>
       </button>
       <div className={styles.grid}>
+
         {filteredLocalProducts.map(producto => (
           <ProductCard key={`local-${producto.id}`} {...producto} />
         ))}
@@ -100,6 +107,7 @@ export default function ProductosPage() {
             descripcion={product.description} 
             precio={product.price} 
             imagen={`http://localhost:3001${product.image}`}
+
           />
         ))}
       </div>

@@ -3,11 +3,13 @@
   max-width: 950px;
   margin: 3rem auto;
   padding: 2.5rem 3rem;
+
   background: #ffffff;
   border-radius: 1.2rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   font-family: "Poppins", system-ui, sans-serif;
   color: #222;
+
 }
 
 .cartPage h1 {
@@ -31,14 +33,18 @@
   justify-content: space-between;
   padding: 1.2rem;
   border-radius: 1rem;
+
   background: #fafafa;
   border: 1px solid #e4e4e4;
+
   margin-bottom: 1rem;
   transition: all 0.25s ease;
 }
 
 .cartItem:hover {
+
   background: #f3f3f3;
+
   transform: translateY(-2px);
 }
 
@@ -63,12 +69,16 @@
   font-size: 1rem;
   margin: 0;
   font-weight: 500;
+
   color: #222;
+
 }
 
 .cartInfo p {
   margin: 0.3rem 0;
+
   color: #666;
+
   font-size: 0.9rem;
 }
 
@@ -156,9 +166,11 @@
 }
 
 .checkoutBtn {
+
   background: linear-gradient(135deg, #0623ff, #1e00ff);
   border: none;
   color: #fff;
+
   padding: 0.8rem 1.4rem;
   border-radius: 0.8rem;
   font-size: 0.95rem;
@@ -167,7 +179,9 @@
 }
 
 .checkoutBtn:hover {
+
   background: linear-gradient(135deg, #090909, #000);
+
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -175,7 +189,9 @@
 /* 🧺 MENSAJE DE CARRITO VACÍO */
 .empty {
   text-align: center;
+
   color: #777;
+
   font-size: 1rem;
   padding: 3rem 1rem;
 }
@@ -188,7 +204,9 @@
   width: 360px;
   height: 100vh;
   background: #ffffff;
+
   box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+
   padding: 2rem;
   transform: translateX(100%);
   transition: transform 0.35s ease-in-out;
@@ -206,7 +224,9 @@
   background: none;
   border: none;
   font-size: 1.5rem;
+
   color: #111;
+
   cursor: pointer;
   margin-left: auto;
   transition: color 0.2s;
@@ -220,7 +240,9 @@
   margin: 0 0 1.5rem;
   font-size: 1.3rem;
   font-weight: 600;
+
   color: #111;
+
 }
 
 .cartPanel ul {
@@ -247,6 +269,7 @@
     width: 100%;
   }
 }
+
 
 
 /* Número de cantidad */
@@ -289,3 +312,4 @@
   color: #222;               /* tono negro más fuerte */
   margin-top: 6px;
 }
+

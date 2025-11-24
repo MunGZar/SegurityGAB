@@ -4,6 +4,7 @@ import {
   MinLength,
   IsOptional,
   IsIn,
+
   IsString,
 } from 'class-validator';
 
@@ -21,5 +22,6 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsIn(['user', 'admin'], { message: 'El rol debe ser user o admin' })
+
   role?: 'user' | 'admin';
 }

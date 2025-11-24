@@ -7,12 +7,15 @@ export default function ProductForm({
   editingItem,
   onUpdateComplete,
 }: any) {
+
   const [form, setForm] = useState({ name: "", description: "", price: "", stock: "", image: "" });
+
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
   useEffect(() => {
+
     if (editingItem) {
       setForm(editingItem);
       if (editingItem.image) {
@@ -21,6 +24,7 @@ export default function ProductForm({
     } else {
       setForm({ name: "", description: "", price: "", stock: "", image: "" });
       setPreview(null);
+
     }
   }, [editingItem]);
 

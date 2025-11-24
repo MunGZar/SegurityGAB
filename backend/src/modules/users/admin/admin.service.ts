@@ -1,9 +1,13 @@
+
 import { Injectable, NotFoundException } from '@nestjs/common';
+
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './../user_entity/user.entity';
 import * as bcrypt from 'bcrypt';
+
 import { UpdateUserDto } from './../dto/update-user.dto';
+
 import { CreateUserDto } from './../dto/create-user.dto';
 
 @Injectable()
@@ -23,6 +27,7 @@ export class AdminService {
     return this.userRepo.save(user);
   }
 
+
   async update(id: number, data: UpdateUserDto): Promise<User> {
     const user = await this.userRepo.findOne({ where: { id } });
     if (!user) throw new NotFoundException(`Usuario con id ${id} no encontrado`);
@@ -41,5 +46,6 @@ export class AdminService {
 
     await this.userRepo.remove(user);
     return { message: `Usuario con id ${id} eliminado correctamente` };
+
   }
 }
