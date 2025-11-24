@@ -219,7 +219,6 @@ export default function CheckoutPage() {
               name="facturacion"
               checked={metodoFacturacion === "mismo"}
               onChange={() => setMetodoFacturacion("mismo")}
-
             />
 
             La misma dirección de envío
@@ -235,22 +234,17 @@ export default function CheckoutPage() {
               name="facturacion"
               checked={metodoFacturacion === "distinta"}
               onChange={() => setMetodoFacturacion("distinta")}
-
             />
             Usar una dirección de facturación distinta
           </label>
         </div>
 
         {/* BOTÓN DE PAGO */}
-
-            />{" "}
-            Usar una dirección distinta
-          </label>
+        <div className={styles.section}>
+          <button className={styles.payButton} onClick={handlePago}>
+            Pagar ahora
+          </button>
         </div>
-
-        {/* BOTÓN PAGO */}
-
-
 
         {/* LINKS */}
 
