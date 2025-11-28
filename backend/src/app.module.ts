@@ -14,9 +14,7 @@ import { AuthModule } from './modules/auth/auth.module';
 
 import { AdminModule } from './modules/users/admin/admin.module';
 
-
 @Module({
-
   imports: [
     AuthModule,
 
@@ -35,7 +33,6 @@ import { AdminModule } from './modules/users/admin/admin.module';
     UsersModule,
     ProductsModule,
     AdminModule,
-
   ],
   controllers: [AppController],
   providers: [AppService],
