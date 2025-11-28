@@ -9,6 +9,9 @@ import { productos as localProductos } from './data/productos';
 import FilterSidebar from './components/FilterSidebar';
 
 
+import ImageCarousel from './components/ImageCarousel';
+
+
 interface DbProduct {
   id: number;
   name: string;
@@ -73,7 +76,9 @@ export default function ProductosPage() {
     <section className={styles.section}>
       <br />
       <br />
-      <h1 className={styles.title}>Catálogo de Cámaras CCTV</h1>
+      <ImageCarousel />
+      <br />
+      <br />
       <button 
         onClick={() => setIsSidebarOpen(true)}
         className="absolute top-20 left-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded flex items-center justify-center"
