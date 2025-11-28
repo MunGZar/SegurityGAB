@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import Nadvar from "./components/Nadvar";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "SecurityGAB",
@@ -19,6 +20,7 @@ export default function RootLayout({children,}: {children: React.ReactNode;}) {
                 
             <Nadvar />
             <main className="max-w-7xl mx-auto">{children}</main>
+            <Footer />
           </CartProvider>
         </AuthProvider>
       </body>
