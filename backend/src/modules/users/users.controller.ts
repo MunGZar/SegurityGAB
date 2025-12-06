@@ -1,7 +1,17 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user_entity/user.entity';
+import { JwtAuthGuard } from '../auth/strategies/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -17,6 +27,13 @@ export class UsersController {
   @Get()
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  // Obtener usuario autenticado
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  async getProfile(@Req() req): Promise<any> {
+    return req.user; // viene desde el JWT
   }
 
   // Actualizar rol de un usuario

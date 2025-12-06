@@ -4,8 +4,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
 
-// Modern Stripe-like dashboard single-file React component using Tailwind CSS
-// Notes: expects Tailwind to be available in the project. Replace image path if needed.
+
 
 interface Order {
   id: number;
