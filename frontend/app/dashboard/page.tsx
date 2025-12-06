@@ -6,8 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { user, token } = useAuth(); //prueba de contexto
-  
+  const { user, token } = useAuth();
 
   useEffect(() => {
    
