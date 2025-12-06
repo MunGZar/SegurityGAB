@@ -11,19 +11,19 @@ export default function DashboardPage() {
   useEffect(() => {
    
     if (!user || !token) {
-      router.push("/page");
+      router.push("/login");
       return;
     }
 
     
     if (user.role === "admin") {
-      router.push("/admin");
+      router.push("/dashboard/admin");
       return;
     }
 
    
     if (user.role === "user") {
-      router.push("/productos");
+      router.push("/dashboard/user");
       return;
     }
   }, [user, token, router]);
