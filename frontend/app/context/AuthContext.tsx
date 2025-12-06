@@ -3,17 +3,17 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 interface UserType {
   email: string;
-
   name: string;
-
   role: "user" | "admin";
 }
 
 interface AuthContextType {
   user: UserType | null;
   token: string | null;
-  login: (user: UserType, token: string) => void;
+  loading: boolean;
+  login: (userData: UserType, jwtToken: string) => void;
   logout: () => void;
+  updateUser: (userData: Partial<UserType>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,15 +27,19 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<UserType | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Cargar usuario y token desde localStorage al iniciar
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
+
     if (storedToken && storedUser) {
       setToken(storedToken);
       setUser(JSON.parse(storedUser));
     }
+
+    setLoading(false);
   }, []);
 
   const login = (userData: UserType, jwtToken: string) => {
@@ -52,8 +56,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(null);
   };
 
+  const updateUser = (userData: Partial<UserType>) => {
+    setUser((prev) => {
+      const updated = { ...prev, ...userData } as UserType;
+      localStorage.setItem("user", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

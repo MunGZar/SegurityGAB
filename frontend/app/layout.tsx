@@ -1,4 +1,3 @@
-
 import "../styles/globals.css";
 import Nadvar from "./components/Nadvar";
 import { AuthProvider } from "./context/AuthContext";
@@ -10,16 +9,22 @@ export const metadata = {
   description: "Sistema de seguridad electrónica con carrito de compras",
 };
 
-export default function RootLayout({children,}: {children: React.ReactNode;}) {
-  
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="es">
-      <body className="bg-gray-100">
+    <html lang="es" suppressHydrationWarning>
+      <body className="bg-gray-100 min-h-screen antialiased">
         <AuthProvider>
           <CartProvider>
-                
             <Nadvar />
-            <main className="max-w-7xl mx-auto">{children}</main>
+            
+            <main className="max-w-7xl mx-auto min-h-screen pt-4 pb-10">
+              {children}
+            </main>
+
             <Footer />
           </CartProvider>
         </AuthProvider>
