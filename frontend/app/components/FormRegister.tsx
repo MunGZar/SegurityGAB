@@ -1,36 +1,40 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function FormRegister() {
   const router = useRouter();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState<{ type: "error" | "success"; text: string } | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    if (msg) setMsg(null);
   };
 
   const handleRegister = async () => {
     const { name, email, password, confirmPassword } = form;
 
     if (!name || !email || !password || !confirmPassword) {
-      alert("Todos los campos son obligatorios");
-      return;
+      return setMsg({ type: "error", text: "Todos los campos son obligatorios" });
     }
+
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
-      return;
+      return setMsg({ type: "error", text: "Las contraseñas no coinciden" });
     }
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3001/auth/register", {
+      const res = await fetch("http://localhost:3001/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -39,16 +43,17 @@ export default function FormRegister() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Error al registrar usuario");
+        setMsg({ type: "error", text: data.message || "Error al registrar usuario" });
         setLoading(false);
         return;
       }
 
-      alert("✅ Registro exitoso, ahora puedes iniciar sesión");
-      router.push("/login");
+      setMsg({ type: "success", text: "Registro exitoso. Redirigiendo..." });
+
+      setTimeout(() => router.push("/login"), 1500);
     } catch (err) {
       console.error(err);
-      alert("Error de conexión con el servidor");
+      setMsg({ type: "error", text: "Error de conexión con el servidor" });
     } finally {
       setLoading(false);
     }
@@ -61,6 +66,16 @@ export default function FormRegister() {
       <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">
         Crear Cuenta
       </h2>
+
+      {msg && (
+        <p
+          className={`mb-4 text-center font-semibold ${
+            msg.type === "error" ? "text-red-600" : "text-green-600"
+          }`}
+        >
+          {msg.text}
+        </p>
+      )}
 
       <input
         type="text"

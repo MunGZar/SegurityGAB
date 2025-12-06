@@ -13,6 +13,8 @@ import { ProductsModule } from './modules/products/products.module';
 import { AuthModule } from './modules/auth/auth.module';
 
 import { AdminModule } from './modules/users/admin/admin.module';
+import { register } from 'module';
+import { RegisterModule } from './modules/register/register.module';
 
 @Module({
   imports: [
@@ -32,7 +34,7 @@ import { AdminModule } from './modules/users/admin/admin.module';
     }),
     UsersModule,
     ProductsModule,
-    AdminModule,
+    AdminModule,RegisterModule
   ],
   controllers: [AppController],
   providers: [AppService],
