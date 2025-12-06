@@ -8,12 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "carousel": "^0.0.3",
     "lucide-react": "^0.544.0",
     "next": "15.5.4",
     "next-navigation-guard": "^0.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
+    "react-responsive": "^10.0.1",
     "react-responsive-carousel": "^3.2.23"
   },
   "devDependencies": {
