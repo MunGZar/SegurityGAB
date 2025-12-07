@@ -21,7 +21,7 @@ export default function FilterSidebar({
   setCameraTypeFilter,
   resolutionFilter,
   setResolutionFilter,
-}: FilterSidebarProps) {
+}: FilterSidebarProps) {//prueba
   return (
     <div
       className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
